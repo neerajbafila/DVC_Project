@@ -32,3 +32,19 @@ stages:
     - path: data/processed/train_Admission_Prediction.csv
       md5: aecadd05e14fc9f10562d90eea20e474
       size: 16143
+  train_and_evaluate:
+    cmd: python src/train_and_evaluate.py --config=params.yaml
+    deps:
+    - path: data/processed/test_Admission_Prediction.csv
+      md5: d1e597f5addb6ac399371593b6697138
+      size: 4082
+    - path: data/processed/train_Admission_Prediction.csv
+      md5: aecadd05e14fc9f10562d90eea20e474
+      size: 16143
+    - path: src/train_and_evaluate.py
+      md5: afa7a548e776989b6b30d1c9c982aefb
+      size: 2636
+    outs:
+    - path: report/scores.json
+      md5: d32fa88ba918aea46b63d4d001d098b9
+      size: 100

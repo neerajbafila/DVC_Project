@@ -1,7 +1,7 @@
 base:
   project: Admission-prediction
   random_state: 42
-  target_col: Chance of Admit
+  target_col: Chance_of_Admit
 
 data_source:
   s3_scource: data_given/Admission_Prediction.csv
@@ -17,4 +17,9 @@ split_data:
 estimators: LinearRegression
 
 model_dir: saved_models
+
+reports:
+  # params: report/params.json
+  scores: report/scores.json
+
             
