@@ -27,7 +27,7 @@ if __name__=='__main__':
     parsed_args = args.parse_args()
     config_path = parsed_args.config
     data = get_data(config_path=config_path)
-    print(data)
+
 
    
   
