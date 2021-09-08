@@ -11,7 +11,7 @@ def load_and_save(config_path):
     df = get_data(config_path)
     new_col = [col.replace(' ', '_') for col in df.columns]
     raw_data_path = config['load_data']['raw_dataset_csv']
-    df.to_csv(raw_data_path, index=False,header=new_col)
+    df.to_csv(raw_data_path,sep=',', index=False,header=new_col)
 
 
 if __name__ == '__main__':

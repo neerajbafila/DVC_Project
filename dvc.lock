@@ -10,8 +10,8 @@ stages:
       md5: ba66d59729a7b26373887066fb24f9d1
       size: 712
     - path: src/load_data.py
-      md5: f20e446ad9c7794f81f10ef4478224f0
-      size: 684
+      md5: 0e85695713f059c3e46b9120d4d13773
+      size: 692
     outs:
     - path: data/raw/Admission_Prediction.csv
       md5: 1f034b82d2bbc5302aa8a75b3e2f028d
