@@ -13,7 +13,7 @@ ruamel.yaml==0.17.16
 ruamel.yaml.clib==0.2.6
 shortuuid==1.0.1
 shtab==1.4.1
-sklearn==0.0
+sklearn==0.21.3
 speedcopy==2.1.0
 tabulate==0.8.9
 text-unidecode==1.3
