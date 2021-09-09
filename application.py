@@ -3,9 +3,36 @@
 from flask import Flask, render_template, request
 from flask_cors import cross_origin
 import pickle
+import os
+import yaml
+import joblib
+import numpy as np
 
-application = Flask(__name__) # initializing a flask app
+params_path = "params.yaml"
+webapp_root = "webapp"
+static_dir = os.path.join(webapp_root, "static")
+template_dir = os.path.join(webapp_root, "templates")
+
+
+application = Flask(__name__, static_folder=static_dir,template_folder=template_dir) # initializing a flask app
 # app=application
+
+def read_params(config_path):
+    with open(config_path) as yaml_file:
+        config = yaml.safe_load(yaml_file)
+        return config
+
+def predict(gre_score,toefl_score,university_rating,sop,lor,cgpa,research):
+    try:
+        config = read_params(params_path)
+        model_dir_path = config['webapp_model_dir']
+        model = joblib.load(model_dir_path)
+        prediction = model.predict([[gre_score,toefl_score,university_rating,sop,lor,cgpa,research]])
+        print(prediction)
+        return prediction
+    except Exception as e:
+            print(e)
+
 @application.route('/',methods=['GET'])  # route to display the home page
 @cross_origin()
 def homePage():
@@ -28,13 +55,14 @@ def index():
                 research=1
             else:
                 research=0
-            filename = 'finalized_model.pickle'
-            loaded_model = pickle.load(open(filename, 'rb')) # loading the model file from the storage
-            # predictions using the loaded model file
-            prediction=loaded_model.predict([[gre_score,toefl_score,university_rating,sop,lor,cgpa,research]])
-            print('prediction is', prediction)
-            # showing the prediction results in a UI
-            return render_template('results.html',prediction=round(100*prediction[0]))
+            prediction = predict(gre_score,toefl_score,university_rating,sop,lor,cgpa,research)
+            # filename = 'finalized_model.pickle'
+            # loaded_model = pickle.load(open(filename, 'rb')) # loading the model file from the storage
+            # # predictions using the loaded model file
+            # prediction=loaded_model.predict([[gre_score,toefl_score,university_rating,sop,lor,cgpa,research]])
+            # print('prediction is', prediction)
+            # # showing the prediction results in a UI
+            return render_template('results.html',prediction=np.round(100*prediction[0][0],4))
         except Exception as e:
             print('The Exception message is: ',e)
             return 'something is wrong'
