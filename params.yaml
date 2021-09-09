@@ -23,6 +23,7 @@ reports:
   scores: report/scores.json
 
 webapp_model_dir: prediction_service/model/model.joblib
+webapp_scaler_dir: prediction_service/model/scaler.joblib
 
   
 

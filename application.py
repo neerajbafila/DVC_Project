@@ -4,9 +4,11 @@ from flask import Flask, render_template, request
 from flask_cors import cross_origin
 import pickle
 import os
+from scipy.sparse import data
 import yaml
 import joblib
 import numpy as np
+
 
 params_path = "params.yaml"
 webapp_root = "webapp"
@@ -26,8 +28,12 @@ def predict(gre_score,toefl_score,university_rating,sop,lor,cgpa,research):
     try:
         config = read_params(params_path)
         model_dir_path = config['webapp_model_dir']
+        scaler_dir_path = config['webapp_scaler_dir']
         model = joblib.load(model_dir_path)
-        prediction = model.predict([[gre_score,toefl_score,university_rating,sop,lor,cgpa,research]])
+        scaler = joblib.load(scaler_dir_path)
+        data = scaler.transform([[gre_score,toefl_score,university_rating,sop,lor,cgpa,research]])
+        # data = scaler.fit_transform([gre_score,toefl_score,university_rating,sop,lor,cgpa,research])
+        prediction = model.predict(data)
         print(prediction)
         return prediction
     except Exception as e:
