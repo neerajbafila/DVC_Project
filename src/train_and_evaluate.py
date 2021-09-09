@@ -15,6 +15,7 @@ from get_data import read_params
 import joblib
 import json
 
+
 def eval_metrics(actual, pred):
     rmse = np.sqrt(mean_squared_error(actual, pred))
     mae = mean_absolute_error(actual, pred)
@@ -83,6 +84,7 @@ def train_and_evaluate(config_path):
 
     joblib.dump(lr, model_path)
 
+   
 
 if __name__ == '__main__':
     args = argparse.ArgumentParser()
@@ -90,3 +92,4 @@ if __name__ == '__main__':
     parsed_args = args.parse_args()
     config_path = parsed_args.config
     train_and_evaluate(config_path=config_path)
+    
