@@ -14,7 +14,7 @@ class NotinRange(Exception):
     Args:
         Exception ([type]): [description]
     """
-    def __init__(self, message="Gaiven value are not in range"):
+    def __init__(self, message="Given value are not in range"):
         self.message = message
         super().__init__(self.message)
 
