@@ -4,8 +4,8 @@ stages:
     cmd: python src/load_data.py --config=params.yaml
     deps:
     - path: data_given/Admission_Prediction.csv
-      md5: cd14ca2225604657c45e812925e55876
-      size: 16416
+      md5: f7c8b3e6669acba895870e4791995af7
+      size: 16641
     - path: src/get_data.py
       md5: ba66d59729a7b26373887066fb24f9d1
       size: 712
@@ -14,37 +14,37 @@ stages:
       size: 692
     outs:
     - path: data/raw/Admission_Prediction.csv
-      md5: 0362c80b264dcb2575afa8b8a7533e57
-      size: 20542
+      md5: 79a2fe8bf260c60ee07f7dee3c1c4797
+      size: 21849
   split_data:
     cmd: python src/split_data.py --config=params.yaml
     deps:
     - path: data/raw/Admission_Prediction.csv
-      md5: 0362c80b264dcb2575afa8b8a7533e57
-      size: 20542
+      md5: 79a2fe8bf260c60ee07f7dee3c1c4797
+      size: 21849
     - path: src/split_data.py
       md5: 7b082cce7fe2adb748438a9439a2a566
       size: 1073
     outs:
     - path: data/processed/test_Admission_Prediction.csv
-      md5: 4ad2fa2a8550fbb4b6803f37e315b6fa
-      size: 4176
+      md5: 7efe9f360ed80fc69d39c05922d07139
+      size: 4472
     - path: data/processed/train_Admission_Prediction.csv
-      md5: 0979d79d4b81a12a9373524842b33395
-      size: 16456
+      md5: 4d09261459f2484e972b4988f966563e
+      size: 17467
   train_and_evaluate:
     cmd: python src/train_and_evaluate.py --config=params.yaml
     deps:
     - path: data/processed/test_Admission_Prediction.csv
-      md5: 4ad2fa2a8550fbb4b6803f37e315b6fa
-      size: 4176
+      md5: 7efe9f360ed80fc69d39c05922d07139
+      size: 4472
     - path: data/processed/train_Admission_Prediction.csv
-      md5: 0979d79d4b81a12a9373524842b33395
-      size: 16456
+      md5: 4d09261459f2484e972b4988f966563e
+      size: 17467
     - path: src/train_and_evaluate.py
       md5: d0f55e72e414663d461c92c8485e801e
       size: 2879
     outs:
     - path: report/scores.json
-      md5: ee772b2ca4dfe604efdbfe5f5f716c98
-      size: 102
+      md5: df6fa59dcd2cc206c57e54b22c443c2b
+      size: 101
